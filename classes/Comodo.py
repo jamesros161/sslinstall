@@ -28,7 +28,11 @@ class Comodo():
         credsfilename = '/comodocreds.json'
         try:
             with open(path + credsfilename, 'r') as comodoCreds:
-                self.creds = json.load(comodoCreds)
+                try: 
+                    self.creds = json.load(comodoCreds)
+                except json.decoder.JSONDecodeError:
+                    log.error_invalidcredsformat(self, path + credsfilename)
+                    sys.exit(1)
         except FileNotFoundError:
             log.error_comodoCredsNotFound(self, path + credsfilename)
             sys.exit(1)

@@ -30,7 +30,8 @@ class Log():
             'collectSslSuccess' : 'SSL Successfully Collected from Comodo : ',
             'inputargs' : 'Input Arguments Parsed : ',
             'comodoargs' : 'Comodo.args has been stored as : ',
-            'credsNotFoundMsg' : 'Comodo Creds file not found : '
+            'credsNotFoundMsg' : 'Comodo Creds file not found : ',
+            'invalidcredsformat' : 'Comodo Creds file is not a valid JSON file'
         }
         
         timestamp = datetime.today().strftime("%Y-%m-%d")
@@ -179,3 +180,6 @@ class Log():
     def error_comodoCredsNotFound(self, debug_location, credsfilepath):
         self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
             self.messages['credsNotFoundMsg'], credsfilepath)
+    def error_invalidcredsformat(self, debug_location, credsfilepath):
+        self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
+            self.messages['invalidcredsformat'], credsfilepath)
