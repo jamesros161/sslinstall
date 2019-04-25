@@ -34,23 +34,29 @@ class Domain():
 
         #Uses test data for testing / debugging
         if self.testMode:
-            path = os.path.dirname(os.path.realpath(__file__))
-            with open(path + '/../test/testCsrInputData.json', 'r') as testCsrInputData:
+            path = '/opt/dedrads/sslinstall/test'
+            self.loadtestfile(path, '/testCsrInputData.json')
+            with open(path + '/testCsrInputData.json', 'r') as testCsrInputData:
                 self.csr_input_data = json.load(testCsrInputData)
                 log.info_storecsr(self, self.csr_input_data)
-            with open(path + '/../test/testDomainData.json', 'r') as testDomainData:
+            self.loadtestfile(path, '/testDomainData.json')
+            with open(path + '/testDomainData.json', 'r') as testDomainData:
                 self.domain_data = json.load(testDomainData)
                 log.info_gotdomdata(self,self.domain_data)
-            with open(path + '/../test/testCsrData.json', 'r') as testCsrData:
+            self.loadtestfile(path, '/testCsrData.json')
+            with open(path + '/testCsrData.json', 'r') as testCsrData:
                 self.csr_data = json.load(testCsrData)
                 log.info_storedcsrdata(self,self.csr_data)
-            with open(path + '/../test/testDcvData.json', 'r') as testDcvData:
+            self.loadtestfile(path, '/testDcvData.json')
+            with open(path + '/testDcvData.json', 'r') as testDcvData:
                 self.dcv_data = json.load(testDcvData)
                 log.info_storeddcvdata(self,self.dcv_data)
-            with open(path + '/../test/testSslOrder.json', 'r') as testSslOrder:
+            self.loadtestfile(path, '/testSslOrder.json')
+            with open(path + '/testSslOrder.json', 'r') as testSslOrder:
                 self.sslOrder = json.load(testSslOrder)
                 log.info_sslOrderSuccess('testMode' ,self.sslOrder[1])
-            with open(path + '/../test/testSslCert.json', 'r') as testSslCert:
+            self.loadtestfile(path, '/testSslCert.json')
+            with open(path + '/testSslCert.json', 'r') as testSslCert:
                 self.SslCertRaw = json.load(testSslCert)
             self.sslCert = self.urlEncodeCrt()
 
@@ -131,6 +137,19 @@ class Domain():
 
 
         log.debug_endinst(self)
+
+    def loadtestfile(self, path, testfilename):
+        try:
+            with open(path + testfilename, 'r') as comodoCreds:
+                try: 
+                    istestfilevalid = json.load(comodoCreds)
+                except json.decoder.JSONDecodeError:
+                    log.error_invalidtestfile(self, path + testfilename)
+                    sys.exit(1)
+        except FileNotFoundError:
+            log.error_testfilenotfound(self, path + testfilename)
+            sys.exit(1)
+
 
     def makedir(self):
         """This Method uses subprocess to make the DCV Directory"""

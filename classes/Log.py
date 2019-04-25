@@ -31,7 +31,9 @@ class Log():
             'inputargs' : 'Input Arguments Parsed : ',
             'comodoargs' : 'Comodo.args has been stored as : ',
             'credsNotFoundMsg' : 'Comodo Creds file not found : ',
-            'invalidcredsformat' : 'Comodo Creds file is not a valid JSON file'
+            'invalidcredsformat' : 'Comodo Creds file is not a valid JSON file',
+            'testfilenotfoundmsg' : 'Test File not found : ',
+            'invalidcredsformat' : 'Test File is not a valid JSON file'
         }
         
         timestamp = datetime.today().strftime("%Y-%m-%d")
@@ -180,6 +182,15 @@ class Log():
     def error_comodoCredsNotFound(self, debug_location, credsfilepath):
         self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
             self.messages['credsNotFoundMsg'], credsfilepath)
+
     def error_invalidcredsformat(self, debug_location, credsfilepath):
+        self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
+            self.messages['invalidcredsformat'], credsfilepath)
+
+    def error_testfilenotfound(self, debug_location, testfilepath):
+        self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
+            self.messages['testfilenotfoundmsg'], testfilepath)
+            
+    def error_invalidtestfile(self, debug_location, credsfilepath):
         self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
             self.messages['invalidcredsformat'], credsfilepath)
