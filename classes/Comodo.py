@@ -25,9 +25,14 @@ class Comodo():
         #Comodo login Credentials stored in a seperate Credentials file
         #JSON format {"loginName": "<login username>", "loginPassword": "<login password>"}
         path = '/opt/dedrads/sslinstall'
-        with open(path + '/comodocreds.json', 'r') as comodoCreds:
+        credsfilename = '/comodocreds.json'
+        try:
+            with open(path + credsfilename, 'r') as comodoCreds:
                 self.creds = json.load(comodoCreds)
-        	
+        except FileNotFoundError:
+            log.error_comodoCredsNotFound(self, path + credsfilename)
+            sys.exit(1)
+
         self.headers = {
 	        'Content-Type' : 'application/x-www-form-urlencoded',
             'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'

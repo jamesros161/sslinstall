@@ -29,7 +29,8 @@ class Log():
             'sslcollecterror' : 'There was an error trying to collect the SSL Cert from Comodo : ',
             'collectSslSuccess' : 'SSL Successfully Collected from Comodo : ',
             'inputargs' : 'Input Arguments Parsed : ',
-            'comodoargs' : 'Comodo.args has been stored as : '
+            'comodoargs' : 'Comodo.args has been stored as : ',
+            'credsNotFoundMsg' : 'Comodo Creds file not found : '
         }
         
         timestamp = datetime.today().strftime("%Y-%m-%d")
@@ -173,4 +174,8 @@ class Log():
 
     def error_failedCollectSSL(self, debug_location):
         self.logger.error('%s : %s', debug_location.__name__,
-            self.messages['sslcollecterror'])    
+            self.messages['sslcollecterror'])
+    
+    def error_comodoCredsNotFound(self, debug_location, credsfilepath):
+        self.logger.error('%s : %s : %s', debug_location.__class__.__name__,
+            self.messages['credsNotFoundMsg'], credsfilepath)
