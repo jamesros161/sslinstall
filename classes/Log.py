@@ -33,7 +33,7 @@ class Log():
         }
         
         timestamp = datetime.today().strftime("%Y-%m-%d")
-        path = '/var/log/'
+        path = '/opt/dedrads/sslinstall/'
 
         filename = path + 'sslinstall_' + timestamp + '.log'
 
