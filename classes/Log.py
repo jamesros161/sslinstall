@@ -72,6 +72,16 @@ class Log():
             debug_location.__class__.__name__, 
             self.messages['comodoargs'], comodoargs) 
 
+    def debug_endString(self, debug_location, endstring):
+        self.logger.debug('%s : Endstring is: %s', 
+            debug_location.__name__, 
+            endstring)
+
+    def debug_beginString(self, debug_location, beginstring):
+        self.logger.debug('%s : Endstring is: %s', 
+            debug_location.__name__, 
+            beginstring)
+
     #INFO Methods
    
     def info_argsparsed(self, debug_location, input_args):

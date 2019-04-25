@@ -228,7 +228,10 @@ class Domain():
             dict  -- Dict containing cabundle and certificate
         """
         beginString = [i for i, x in enumerate(self.SslCertRaw) if x == "-----BEGIN CERTIFICATE-----"]
+        log.debug_beginString(self.urlEncodeCrt, beginString)
         endString = [i for i, x in enumerate(self.SslCertRaw) if x == "-----END CERTIFICATE-----"]
+        log.debug_endString(self.urlEncodeCrt, endString)
+
         s = '\n'
         sslCert = {
             'cabundle' : urllib.parse.quote_plus((s.join(self.SslCertRaw[beginString[0]:endString[0] + 1]))),
