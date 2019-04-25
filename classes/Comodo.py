@@ -166,6 +166,7 @@ class Comodo():
             print("Comodo SSL Order Failed\n \
                 Comodo Error message : " + str(sslOrder[1]))
             log.error_failedSslOrder(self.orderSsl, sslOrder[1])
+            sys.exit(1)
 
         if int(sslOrder[0]) == 0:
             log.info_sslOrderSuccess(self.orderSsl, sslOrder[1])
