@@ -33,9 +33,9 @@ class Log():
         }
         
         timestamp = datetime.today().strftime("%Y-%m-%d")
-        path = os.path.dirname(os.path.realpath(__file__))
+        path = '/var/log/'
 
-        filename = path + '/../logs/sslinstall_' + timestamp + '.log'
+        filename = path + 'sslinstall_' + timestamp + '.log'
 
         logging.basicConfig(
             filename=filename,

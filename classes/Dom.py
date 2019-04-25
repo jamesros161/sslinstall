@@ -1,4 +1,4 @@
-import json, os, subprocess, sys, urllib.parse, requests
+import json, getpass, os, subprocess, sys, urllib.parse, requests
 from pwd import getpwnam
 from grp import getgrnam
 
@@ -6,8 +6,15 @@ from classes.Log import Log
 from classes.whm import WHM
 from classes.Comodo import Comodo
 from classes.Commands import Commands
+if getpass.getuser() != 'root':
+    print('This Script must be run as Root.\n \
+        Come back when you have the right privileges \n \
+            Maybe try sudo?')
+    sys.exit(1)
 
-log = Log()
+if getpass.getuser() == 'root':
+    log = Log()
+
 whm = WHM()
 options = Commands()
 com = Comodo(options.input_args['testssl'])

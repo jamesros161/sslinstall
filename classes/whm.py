@@ -1,7 +1,14 @@
-import sys, os, subprocess, json, urllib.parse
+import getpass, sys, os, subprocess, json, urllib.parse
 from classes.Log import Log
 
-log = Log()
+if getpass.getuser() != 'root':
+    print('This Script must be run as Root.\n \
+        Come back when you have the right privileges \n \
+            Maybe try sudo?')
+    sys.exit(1)
+
+if getpass.getuser() == 'root':
+    log = Log()
 class WHM():
     """This is the class used to make calls to WHM
     

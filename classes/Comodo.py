@@ -1,6 +1,14 @@
-import requests, sys, json, time, random, string, os
+import getpass, requests, sys, json, time, random, string, os
 from classes.Log import Log
-log = Log()
+
+if getpass.getuser() != 'root':
+    print('This Script must be run as Root.\n \
+        Come back when you have the right privileges \n \
+            Maybe try sudo?')
+    sys.exit(1)
+
+if getpass.getuser() == 'root':
+    log = Log()
 
 class Comodo():
     def __init__(self, isTestSsl):
