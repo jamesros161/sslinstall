@@ -141,14 +141,15 @@ class Domain():
     def loadtestfile(self, path, testfilename):
         try:
             with open(path + testfilename, 'r') as comodoCreds:
-                try: 
-                    istestfilevalid = json.load(comodoCreds)
-                except json.decoder.JSONDecodeError:
-                    log.error_invalidtestfile(self, path + testfilename)
-                    sys.exit(1)
+                istestfilevalid = json.load(comodoCreds)
+                log.debug(istestfilevalid)
         except FileNotFoundError:
             log.error_testfilenotfound(self, path + testfilename)
             sys.exit(1)
+        except json.decoder.JSONDecodeError:
+            log.error_invalidtestfile(self, path + testfilename)
+            sys.exit(1)
+                
 
 
     def makedir(self):
